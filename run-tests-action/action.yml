@@ -9,16 +9,26 @@ runs:
   steps:
     - name: Check Out Code
       uses: actions/checkout@v2
+
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'corretto'
+    
     - name: Grant Execute Permission to Gradlew
       run: chmod +x ./gradlew
-      shell: bash
-    - name: Build and Test with Gradle
-      run: ./gradlew clean test
-      shell: bash
+    
+    - name: Run tests
+      run: ./gradlew test --info
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |
+          build/reports/tests/test/
+        retention-days: 5
