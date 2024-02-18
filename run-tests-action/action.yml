@@ -18,9 +18,11 @@ runs:
     
     - name: Grant Execute Permission to Gradlew
       run: chmod +x ./gradlew
+      shell: bash
     
     - name: Run tests
       run: ./gradlew test --info
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
     
