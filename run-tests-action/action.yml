@@ -21,7 +21,7 @@ runs:
       shell: bash
     
     - name: Run tests
-      run: ./gradlew test --info
+      run: ./gradlew test
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
@@ -34,3 +34,11 @@ runs:
         path: |
           build/reports/tests/test/
         retention-days: 5
+
+    - name: Publish test report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: 'Gradle Test Results'
+        path: 'build/test-results/test/**/*.xml'
+        reporter: 'github-check'
