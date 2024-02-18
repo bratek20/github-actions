@@ -1,10 +1,6 @@
 name: 'Run Tests'
 description: 'Build and test Java project with Gradle'
 inputs:
-  java-version:
-    description: 'Java version to set up'
-    required: true
-    default: '17'
   github-token:
     description: 'GitHub Token for authentication'
     required: true
@@ -16,8 +12,8 @@ runs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: ${{ inputs.java-version }}
-        distribution: 'temurin'
+        java-version: '17'
+        distribution: 'corretto'
     - name: Grant Execute Permission to Gradlew
       run: chmod +x ./gradlew
       shell: bash
