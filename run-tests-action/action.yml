@@ -5,6 +5,9 @@ inputs:
     description: 'Java version to set up'
     required: true
     default: '17'
+  github-token:
+    description: 'GitHub Token for authentication'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -22,4 +25,4 @@ runs:
       run: ./gradlew clean test
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
