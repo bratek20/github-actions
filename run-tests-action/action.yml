@@ -18,6 +18,7 @@ runs:
 
     - name: Build with Gradle
       run: ./gradlew build
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
 
