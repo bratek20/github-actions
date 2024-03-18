@@ -7,7 +7,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: ./run-gradlew-action
+    - uses: bratek20/github-actions/run-gradlew-action@main
       with:
         task: 'build'
         github-token: ${{ inputs.github-token }}
