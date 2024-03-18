@@ -7,7 +7,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: ../run-gradlew-action
+    - uses: ./run-gradlew-action
       with:
         task: 'build'
         github-token: ${{ inputs.github-token }}
