@@ -13,22 +13,22 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Determine Gradle Task
-      id: gradle-task
+    - name: Determine Gradle Args
+      id: gradle-args
       shell: bash
       run: |
-        gradleTask="publish"
+        gradleArgs="publish"
         if [ -n "${{ inputs.module-name }}" ]; then
-          gradleTask=":${{ inputs.module-name }}:publish"
+          gradleArgs=":${{ inputs.module-name }}:publish"
         fi
 
         if [ -n "${{ inputs.project-name }}" ]; then
-          gradleTask="-p ${{ inputs.project-name }} $gradleTask"
+          gradleArgs="-p ${{ inputs.project-name }} $gradleArgs"
         fi
 
-        echo "gradleTask=$gradleTask" >> $GITHUB_OUTPUT
+        echo "gradleArgs=$gradleArgs" >> $GITHUB_OUTPUT
 
     - uses: bratek20/github-actions/run-gradlew-action@main
       with:
-        task: ${{ steps.gradle-task.outputs.gradleTask }}
+        args: ${{ steps.gradle-args.outputs.gradleArgs }}
         github-token: ${{ inputs.github-token }}

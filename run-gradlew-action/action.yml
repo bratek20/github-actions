@@ -1,8 +1,8 @@
 name: 'Run Gradle Wrapper'
 description: 'Executes Gradle Wrapper with the specified action'
 inputs:
-  task:
-    description: 'Name of the task to execute'
+  args:
+    description: 'Args to be passed to gradlew'
     required: true
   github-token:
     description: 'GitHub Token for authentication'
@@ -23,8 +23,8 @@ runs:
       run: chmod +x ./gradlew
       shell: bash
 
-    - name: Execute Gradle Wrapper
-      run: ./gradlew "${{ inputs.task }}"
+    - name: Execute gradlew with args
+      run: ./gradlew ${{ inputs.args }}
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
