@@ -22,11 +22,11 @@ runs:
           gradleTask=":${{ inputs.module-name }}:publish"
         fi
 
-        if [ -z "${{ inputs.project-name }}" ]; then
+        if [ -n "${{ inputs.project-name }}" ]; then
           gradleTask="-p ${{ inputs.project-name }} $gradleTask"
         fi
 
-        
+        echo "gradleTask=$gradleTask" >> $GITHUB_OUTPUT
 
     - uses: bratek20/github-actions/run-gradlew-action@main
       with:
