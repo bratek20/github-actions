@@ -9,7 +9,7 @@ runs:
   steps:
     - uses: bratek20/github-actions/run-gradlew-action@main
       with:
-        args: 'build'
+        args: 'build --info'
         github-token: ${{ inputs.github-token }}
 
     - name: Publish Test Results
