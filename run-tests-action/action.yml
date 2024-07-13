@@ -13,6 +13,7 @@ runs:
   steps:
     - name: Set Gradle Build Command
       id: set-gradle-command
+      shell: bash
       run: |
         if [ -n "${{ inputs.project }}" ]; then
           echo "GRADLE_COMMAND=-p ${{ inputs.project }} build" >> $GITHUB_ENV
