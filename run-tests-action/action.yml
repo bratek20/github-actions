@@ -7,6 +7,9 @@ inputs:
   project:
     description: 'Gradle project name (optional)'
     required: false
+  module:
+    description: 'Specific Gradle module to build (optional)'
+    required: false
 
 runs:
   using: 'composite'
@@ -15,10 +18,15 @@ runs:
       id: set-gradle-command
       shell: bash
       run: |
-        if [ -n "${{ inputs.project }}" ]; then
-          echo "GRADLE_COMMAND=-p ${{ inputs.project }} build" >> $GITHUB_ENV
+        if [ -n "${{ inputs.module }}" ]; then
+          BUILD_COMMAND=":${{ inputs.module }}:build"
         else
-          echo "GRADLE_COMMAND=build" >> $GITHUB_ENV
+          BUILD_COMMAND="build"
+        fi
+        if [ -n "${{ inputs.project }}" ]; then
+          echo "GRADLE_COMMAND=-p ${{ inputs.project }} $BUILD_COMMAND" >> $GITHUB_ENV
+        else
+          echo "GRADLE_COMMAND=$BUILD_COMMAND" >> $GITHUB_ENV
         fi
 
     - uses: bratek20/github-actions/run-gradlew-action@main
