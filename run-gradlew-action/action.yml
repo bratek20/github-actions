@@ -24,19 +24,13 @@ runs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v3
 
-    - name: Change to specified directory if provided
+    - name: Execute gradlew with args
       run: |
         if [ -n "${{ inputs.path }}" ]; then
           cd ${{ inputs.path }}
         fi
-      shell: bash
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-      shell: bash
-
-    - name: Execute gradlew with args
-      run: ./gradlew ${{ inputs.args }}
+        chmod +x ./gradlew
+        ./gradlew ${{ inputs.args }}
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
