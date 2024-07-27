@@ -10,6 +10,9 @@ inputs:
   module:
     description: 'Specific Gradle module to build (optional)'
     required: false
+  path:
+    description: 'Path to the directory where the Gradle project is located (optional)'
+    required: false
 
 runs:
   using: 'composite'
@@ -33,6 +36,7 @@ runs:
       with:
         args: ${{ env.GRADLE_COMMAND }}
         github-token: ${{ inputs.github-token }}
+        path: ${{ inputs.path }}
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
