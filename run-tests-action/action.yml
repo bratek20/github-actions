@@ -22,9 +22,9 @@ runs:
       shell: bash
       run: |
         if [ -n "${{ inputs.module }}" ]; then
-          BUILD_COMMAND=":${{ inputs.module }}:build"
+          BUILD_COMMAND=":${{ inputs.module }}:clean :${{ inputs.module }}:test"
         else
-          BUILD_COMMAND="build"
+          BUILD_COMMAND="clean test"
         fi
         if [ -n "${{ inputs.project }}" ]; then
           echo "GRADLE_COMMAND=-p ${{ inputs.project }} $BUILD_COMMAND" >> $GITHUB_ENV
